@@ -184,7 +184,7 @@ function verificarColisiones() {
     if (pelotaX < 0) {
         computadoraScore += 1; // AI scores
         goalSound.play();
-        if (computadoraScore >= 1) {
+        if (computadoraScore >= 5) {
             gameOver = true;
             loseSound.play();
             myVoice.speak("You lose");
@@ -193,7 +193,7 @@ function verificarColisiones() {
     } else if (pelotaX > width) {
         jugadorScore += 1; // Player scores
         goalSound.play();
-        if (jugadorScore >= 1) {
+        if (jugadorScore >= 5) {
             gameOver = true;
             winSound.play();
             myVoice.speak("You win");
@@ -245,7 +245,7 @@ function mostrarTextoFin() {
     textFont("Electrolize");
     fill(color("#FF3333"));
     textAlign(CENTER, CENTER);
-    text(jugadorScore >= 1 ? "YOU WIN!" : "YOU LOSE!", width / 2, height / 2);
+    text(jugadorScore >= 5 ? "YOU WIN!" : "YOU LOSE!", width / 2, height / 2);
 }
 
 function mousePressed() {

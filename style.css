@@ -5,22 +5,62 @@
     font-weight: 400;
     font-style: normal;
     color: #00faff;
+    margin: 0;
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
     background: linear-gradient(135deg, #2e026b, #5b2d89, #8c1a8e, #d51474);
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
 }
 
 h1 {
-    font-size: 72px;
-    position: absolute;
-    top: 2vh;
+    font-size: 60px;
+    margin: 8vh;
+    align-self: center;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+p,
+li {
+    margin: 0;
+    font-family: "Electrolize", sans-serif;
+    font-size: 16px;
+}
+
+ol {
+    padding: 0;
+    margin-bottom: 10vh;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* Grey with 70% opacity */
+    z-index: 100; /* Ensure it sits on top of other content */
+    display: none; /* Hidden by default */
+}
+
+#canvas-container {
+    z-index: 999;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    align-items: flex-start;
+    width: 800px;
 }

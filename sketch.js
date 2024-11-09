@@ -55,12 +55,18 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(anchoCanvas, altoCanvas);
+
+    // Create the canvas and attach it to the canvas-container div
+    let canvas = createCanvas(anchoCanvas, altoCanvas);
+    drawingContext.imageSmoothingEnabled = false;
+    frameRate(60);
+    canvas.parent('canvas-container');
+
     myVoice = new p5.Speech(); // Create the speech object
     jugadorY = height / 2 - altoRaqueta / 2;
     computadoraY = height / 2 - altoRaqueta / 2;
-    resetPelota(); // Initialize velocity and position
-    textFont("Electrolize"); // Set the font for the text
+    resetPelota(); // Initialize the velocity and position of the ball
+    textFont("Electrolize"); // Set the font for text in the game
 }
 
 function draw() {
@@ -85,6 +91,11 @@ function draw() {
     } else {
         mostrarTextoFin();
     }
+
+    let fps = frameRate();
+    fill(255);
+    textSize(16);
+    text("FPS: " + fps.toFixed(2), 50, height - 20); 
 }
 
 function dibujarMarcos() {
@@ -107,7 +118,7 @@ function dibujarRaquetas() {
 function dibujarPelota() {
     if (bola) {
         push(); // Save current drawing state
-        translate(pelotaX, pelotaY); // Move origin to the center of the ball
+        translate(pelotaX, pelotaY); // M  canvas.parent('canvas-container');ove origin to the center of the ball
         rotate(spin); // Rotate the ball based on its spin
         imageMode(CENTER); // Draw the image centered
         image(bola, 0, 0, diametroPelota, diametroPelota); // Ball image
@@ -222,6 +233,13 @@ function aumentarVelocidad() {
     velocidadPelotaY = velocidadPelota * sin(angle); // Update Y component
 }
 
+window.addEventListener("keydown", function(event) {
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+        event.preventDefault(); // Prevents default arrow key behavior
+    }
+});
+
+
 function moverJugador() {
     // Smooth player movement with arrow keys only
     if (keyIsDown(UP_ARROW)) {
@@ -250,6 +268,7 @@ function mostrarTextoFin() {
 
 function mousePressed() {
     if (!gameStarted) {
+        document.getElementById('overlay').style.display = 'block'
         gameStarted = true;
     }
     if (gameOver) {
@@ -258,5 +277,6 @@ function mousePressed() {
         gameOver = false;
         gameStarted = false;
         resetPelota();
+        document.getElementById('overlay').style.display = 'none';
     }
 }
